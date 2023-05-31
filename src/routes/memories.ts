@@ -17,7 +17,14 @@ export async function memoriesRoutes(app: FastifyInstance) {
       },
     })
 
-    return memories
+    return memories.map((memory) => {
+      return {
+        id: memory.id,
+        coverUrl: memory.coverUrl,
+        excerpt: memory.content,
+        createdAt: memory.createdAt,
+      }
+    })
   })
   app.get('/memories/:id', async (request, reply) => {
     const paramsSchema = z.object({
